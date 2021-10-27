@@ -29,7 +29,7 @@ namespace TeaAPI.Controllers
         {
             var rng = new Random();
             
-            return Ok(Teas[rng.Next(Teas.Length)]);
+            return Ok($"This is Tea Project: {Teas[rng.Next(Teas.Length)]}");
         }
     }
 }
