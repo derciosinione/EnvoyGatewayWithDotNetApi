@@ -16,6 +16,13 @@ namespace TeaAPI.Controllers
             "Green", "Peppermint", "Earl Grey", "English Breakfast", "Camomile"
         };
 
+         private readonly ILogger<TeaController> _logger;
+
+        public TeaController(ILogger<TeaController> logger)
+        {
+            _logger = logger;
+        }
+    
     
         [HttpGet]
         public ActionResult Get()
