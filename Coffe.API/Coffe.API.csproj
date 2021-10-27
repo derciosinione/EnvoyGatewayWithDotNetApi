@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <!-- <UserSecretsId>Coffe.API-25c3e5c0-ddf1-4970-9c9f-defb0c3668af</UserSecretsId> -->
   </PropertyGroup>
 
   <ItemGroup>
