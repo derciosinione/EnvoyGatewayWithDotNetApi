@@ -16,7 +16,7 @@ namespace Coffe.API.Controllers
             "Flat White", "Long Black", "Latte", "Americano", "Cappuccino"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<CoffeController> _logger;
 
         public CoffeController(ILogger<CoffeController> logger)
         {
