@@ -28,7 +28,7 @@ namespace Coffe.API.Controllers
         {
             var rng = new Random();
             
-            return Ok(Coffees[rng.Next(Coffees.Length)]);
+            return Ok($"This is Coffe Project: {Coffees[rng.Next(Coffees.Length)]}");
         }
     }
 }
