@@ -5,34 +5,21 @@ services:
     ports:
       - "9901:9901"
       - "10000:10000"
-      - "10001:10001"
+      # - "10001:10001"
     volumes:
       - ./Envoy/envoy.yaml:/etc/envoy/envoy.yaml
-      - ./Envoy/https.crt:/etc/ssl/certs/https.crt
-      - ./Envoy/key.pem:/etc/ssl/certs/key.pem
+      # - ./Envoy/https.crt:/etc/ssl/certs/https.crt
+      # - ./Envoy/key.pem:/etc/ssl/certs/key.pem
   
-  coffeeapi:
-    build: Coffe.API/
-    ports:
-      - "8080:80"
-      - "8081:443"
-    environment:
-      ASPNETCORE_URLS: "https://+;http://+"
-      ASPNETCORE_HTTPS_PORT: "8081"
-      ASPNETCORE_ENVIRONMENT: "Development"
-    volumes:
-      - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets
-      - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+  identityapi:
+      image: internacionalseguros/identity-managment-api
+      container_name: identityapi
+      ports:
+        - '8081:8081'
 
-  teaapi:
-    build: Tea.API/
-    ports:
-      - "8082:80"
-      - "8083:443"
-    environment:
-      ASPNETCORE_URLS: "https://+;http://+"
-      ASPNETCORE_HTTPS_PORT: "8083"
-      ASPNETCORE_ENVIRONMENT: "Development"
-    volumes:
-      - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets
-      - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+  kycapi:
+      image: internacionalseguros/kyc-api
+      container_name: kycapi
+      ports:
+        - '8082:8082'
+

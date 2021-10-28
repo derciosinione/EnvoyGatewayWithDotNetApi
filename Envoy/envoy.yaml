@@ -1,5 +1,5 @@
 admin:
-  # access_log_path: /tmp/admin_access.log
+  access_log_path: /tmp/admin_access.log
   address:
     socket_address: { address: 0.0.0.0, port_value: 9901 }
 static_resources:
@@ -20,21 +20,24 @@ static_resources:
             - name: local_service
               domains: ["*"]
               routes:
-              - match: { prefix: "/" }
-                route: { cluster: some_service }
+              - match:
+                  prefix: "/i"
+                route:
+                  prefix_rewrite: "/identity"
+                  cluster: identity_service
           http_filters:
           - name: envoy.filters.http.router
   clusters:
-  - name: some_service
+  - name: identity_service
     connect_timeout: 0.25s
-    type: STATIC
+    type: LOGICAL_DNS
     lb_policy: ROUND_ROBIN
     load_assignment:
-      cluster_name: some_service
+      cluster_name: identity_service
       endpoints:
       - lb_endpoints:
         - endpoint:
             address:
               socket_address:
-                address: 0.0.0.0
-                port_value: 1234
+                address: identityapi
+                port_value: 8081
