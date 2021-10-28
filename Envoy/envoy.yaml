@@ -21,9 +21,9 @@ static_resources:
               domains: ["*"]
               routes:
               - match:
-                  prefix: "/i"
+                  prefix: "/identity"
                 route:
-                  prefix_rewrite: "/identity"
+                  prefix_rewrite: "/"
                   cluster: identity_service
           http_filters:
           - name: envoy.filters.http.router
