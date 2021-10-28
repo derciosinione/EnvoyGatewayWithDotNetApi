@@ -25,6 +25,11 @@ static_resources:
                 route:
                   prefix_rewrite: "/"
                   cluster: identity_service
+              - match:
+                  prefix: "/kyc"
+                route:
+                  prefix_rewrite: "/"
+                  cluster: kyc_service
           http_filters:
           - name: envoy.filters.http.router
   clusters:
@@ -41,3 +46,16 @@ static_resources:
               socket_address:
                 address: identityapi
                 port_value: 8081
+  - name: kyc_service
+    connect_timeout: 0.25s
+    type: LOGICAL_DNS
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: kyc_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: kycapi
+                port_value: 8082
